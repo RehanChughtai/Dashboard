@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <!-- Calls all of the scripts and css files which need to be loaded before
+      load -->
+  <meta charset="utf-8">
+  <!-- Api Key for Google sign in -->
+  <meta name="google-signin-client_id" content="155383872343-ab6vaurbtl8eeo9qj7ele7baut3s9sh0.apps.googleusercontent.com">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="todo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://apis.google.com/js/platform.js"></script>
+  <script src="js/minigrid.min.js"></script>
+  <script src="js/hammer.min.js"></script>
+  <script src="js/muuri.min.js"></script>
+  <script src="js/clock.js"></script>
+  <script src="js/getQuote.js"></script>
+  <script src="js/web-animations.min.js"></script>
+  <link href='js/packages/core/main.css' rel='stylesheet' />
+  <link href='js/packages/daygrid/main.css' rel='stylesheet' />
+  <link href='js/packages/list/main.css' rel='stylesheet' />
+  <script src='js/packages/core/main.js'></script>
+  <script src='js/packages/interaction/main.js'></script>
+  <script src='js/packages/daygrid/main.js'></script>
+  <script src='js/packages/list/main.js'></script>
+  <script src='js/packages/google-calendar/main.js'></script>
+  <style>
+    body {
+      /* Design for calendar as this was not doable through the css */
+      margin: 40px 10px;
+      padding: 0;
+      font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+      font-size: 14px;
+    }
+
+    #loading {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    #calendar {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  </style>
+  <title>UP837518</title>
+  <!-- Defines the grid layout and initiates onload -->
+
+  <body onload="theme();">
+    <main class="grid">
+      <section class="item" data-id="10">
+        <!-- Calls google sign in api to access the settings page when
+                  signed into google -->
+        <section class="item-content">
+          <section id="my-signin2-"></section>
+        </section>
+      </section>
+      <main class="item" data-id="1">
+        <main class="item-content">
+          <main id="adminp" style="border-width:2" width="350" height="800">
+            <!-- Sign in button to access settings page -->
+            <section id="my-signin2"></section>
+            <section class="targetDiv" hidden="ture">
+            </section>
+            <!-- Displays Admin Panel -->
+            <h3 class="text-center"> Admin Panel </h3>
+            <button id="admin" class="btn1">
+                              <!-- Shows settings button -->
+                                <i class="fa fa-cog"> Settings</i>
+                            </button>
+            <section>
+              <!-- Displays Quote in the admin panel -->
+              <p id="quote-text"></p>
+              <section class="targetDiv" hidden="true">
+                <button id="getQuote" class="btn1">
+                                      <!-- Button to change randomly generated
+                                      quote -->
+                                        <i class="fa fa-quote-left"> Get Quote</i>
+                                    </button>
+              </section>
+            </section>
+            <!-- Options to change sources for the below -->
+            <form method="POST" action="getOptions">
+              <section class="targetDiv" hidden="true">
+                <p>Change Calendar source...</p>
+                <select id="calendarsource" class="calendarsource" name="calendarsource">
+                                    <option value="en.uk#holiday@group.v.calendar.google.com" name="UK">UK Holidays</option>
+                                    <option value="en.usa#holiday@group.v.calendar.google.com" name="UK">US Holidays</option>
+                                    <option value="ht3jlfaac5lfd6263ulfh4tql8@group.calendar.google.com" name="moon">Moon Phases</option>
+                                    <option value="en.islamic#holiday@group.v.calendar.google.com" name="muslim">Muslim Holidays</option>
+                                </select>
+              </section>
+              <section class="targetDiv" hidden="true">
+                <p>Change Weather Location Here...</p>
+                <select id="weatherlocation" class="weatherlocation" name="weatherlocation">
+                                    <option value="London" name="London">London</option>
+                                    <option value="Portsmouth" name="Portsmouth">Portsmouth</option>
+                                    <option value="Southampton" name="Southampton">Southampton</option>
+                                    <option value="Pakistan" name="Pakistan">Pakistan</option>
+                                </select>
+              </section>
+              <section class="targetDiv" hidden="true">
+                <p>Change Background Colour Here...</p>
+                <select id="bgcolour" class="bgcolour" name="bgcolour">
+                                        <option value="Red" name="Red">Red</option>
+                                        <option value="Green" name="Green">Green</option>
+                                        <option value="lightblue" name="lightblue">Blue</option>
+                                        <option value="Grey" name="Grey">Grey</option>
+                                        <option value="Turquoise" name="Turquoise">Turquoise</option>
+                                        <option value="Yellow" name="Yellow">Yellow</option>
+                                        <option value="White" name="White">White</option>
+                                    </select>
+              </section>
+              <section class="targetDiv" hidden="true">
+                <p>Change News Sources Here...</p>
+                <select id="newssource" class="newssource" name="newssource">
+                                    <option value="?sources=buzzfeed&apiKey=" name="Buzz">Buzz Feed</option>
+                                    <option value="?sources=bbc-news&apiKey=" name="BBC">BBC</option>
+                                    <option value="?sources=fortune&apiKey=" name="Fortune">Fortune</option>
+                                    <option value="?sources=google-news-uk&apiKey=" name="Google UK">Google UK</option>
+                                    <option value="?sources=wired&apiKey=" name="Wired">Wired</option>
+                                    <option value="?sources=independent&apiKey=" name="Independent">Independent</option>
+                                </select>
+              </section>
+              <section>
+              </section>
+              <section>
+                <p></p>
+                <!-- Submit button to allow changes to be confirmed -->
+                <input type="submit" name="submitChanges" value="Apply Changes" class="btn1"></input>
+                <p></p>
+                <!-- Sign out to go back to unattended display -->
+                <input value="Sign out" class="btn2" onclick="signOut();"></input>
+            </form>
+            </section>
+          </main>
+        </main>
+      </main>
+      <section class="item" data-id="9">
+        <!-- Loading animation used for the time it takes for the
+                  calendar to initilise -->
+        <section class="item-content">
+          <section id='loading'>loading...</section>
+          <section id='calendar'></section>
+        </section>
+      </section>
+      <section class="item" data-id="2">
+        <section class="item-content">
+          <section class="date">
+            <!-- Displays Date and Time in a penel -->
+            <section id="date_time" style=" width: 350px; font-size: 16pt; "></section>
+          </section>
+        </section>
+      </section>
+      <section class="item" data-id="3">
+        <section class="item-content">
+          <section id="locc">
+            <!-- Show current location in a penel -->
+            <legend>Your Location</legend>
+            <asp:label runat="server" id="city"></asp:label> ,
+            <asp:label runat="server" id="state"></asp:label> ,
+            <asp:label runat="server" id="country"></asp:label>
+          </section>
+        </section>
+      </section>
+      <section class="item" data-id="4">
+        <section class="item-content">
+          <!-- Displays a Welcome message in a panel -->
+          <section id="username">
+            <legend>Welcome to Dashboard 1.0, you are currently logged in as Admin with ID: UP837518.</legend>
+          </section>
+        </section>
+      </section>
+      <section class="item" data-id="5">
+        <section class="item-content">
+          <section class="news">
+            <section id="newscontainer">
+              <!-- Displays news panel with news feed inside -->
+              <h3 class="text-center"> News Panel </h3>
+              <section class="printResults">
+              </section>
+            </section>
+          </section>
+        </section>
+      </section>
+      <section class="item" data-id="6">
+        <section class="item-content">
+          <!-- Uses weather api to collect information as shown below
+                      for the weather forcast and displays it -->
+          <section id="weatherapi">
+            <section id="weather">
+              <h3 class="text-center"> Weather Forecast </h3>
+              <section id="current"></section>
+              <section id="p"></section>
+              <section id="l"></section>
+              <section id="forecast"></section>
+              <section id="weekdays"></section>
+              <section id="day"></section>
+            </section>
+          </section>
+        </section>
+      </section>
+      <section class="item" data-id="8">
+        <section class="item-content" id="maintodo">
+          <!-- Shows a todo list in its own panel with a add button
+                      to add a new item -->
+          <section class="todolistcontainer">
+            <section>
+              <input type="text" name="todolst" id="todolst" placeholder="Add New Items to do...!" /> </input>
+              <input id="todo-button" value="Add" class="btn3"></input>
+            </section>
+            <ul id="todoitems"></ul>
+          </section>
+        </section>
+      </section>
+    </main>
+    <script>
+      //Function initiates grid layout for responsiveness
+      initGrid();
+
+      function initGrid() {
+        var grid = new Muuri('.grid', {
+          dragEnabled: true,
+          layoutOnInit: true
+        }).on('move', function() {
+          saveLayout(grid);
+        });
+        var layout = window.localStorage.getItem('layout');
+        if (layout) {
+          loadLayout(grid, layout);
+        } else {
+          grid.layout(true);
+        }
+      }
+
+      function serializeLayout(grid) {
+        var itemIds = grid.getItems().map(function(item) {
+          return item.getElement().getAttribute('data-id');
+        });
+        return JSON.stringify(itemIds);
+      }
+
+      function saveLayout(grid) {
+        var layout = serializeLayout(grid);
+        window.localStorage.setItem('layout', layout);
+      }
+
+      function loadLayout(grid, serializedLayout) {
+        var layout = JSON.parse(serializedLayout);
+        var currentItems = grid.getItems();
+        var currentItemIds = currentItems.map(function(item) {
+          return item.getElement().getAttribute('data-id')
+        });
+        var newItems = [];
+        var itemId;
+        var itemIndex;
+        for (var i = 0; i < layout.length; i++) {
+          itemId = layout[i];
+          itemIndex = currentItemIds.indexOf(itemId);
+          if (itemIndex > -1) {
+            newItems.push(currentItems[itemIndex])
+          }
+        }
+        grid.sort(newItems, {
+          layout: 'instant'
+        });
+      }
+    </script>
+    <!-- Once sign out is clicked, you get redirected to unattended display -->
+    <script>
+      // funtion which upon sign out, redirects you to the unattended
+      // dashboard page
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function() {
+          console.log('User signed out.');
+          location.href = 'index.html';
+        });
+      }
+    </script>
+    <script type="text/javascript">
+      //Displays date and time onload
+      window.onload = date_time('date_time');
+    </script>
+    <script>
+      $("#admin").click(function() {
+        $(".targetDiv").toggle("slow");
+      });
+    </script>
+    <script>
+      //Script to display Google User that is logged in, in the command prompt
+      //if no details are incorrcet and error message is displayed in command
+      //prompt
+      function onSuccess(googleUser) {
+        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+      }
+
+      function onFailure(error) {
+        console.log(error);
+      }
+      //Design for the sign in button
+      function renderButton() {
+        gapi.signin2.render('my-signin2', {
+          'scope': 'profile email',
+          'width': 240,
+          'height': 50,
+          'longtitle': true,
+          'theme': 'dark',
+          'onsuccess': onSuccess,
+          'onfailure': onFailure
+        });
+      }
+    </script>
+  </body>
+  <!-- Functions that run onload and display all the apis and features -->
+  <script src="app.js"></script>
+  <script src="js/location.js"></script>
+  <script src="js/scroller.js"></script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+</head>
+
+</html>

@@ -1,0 +1,45 @@
+{
+  "name": "newcw3",
+  "version": "1.0.0",
+  "description": "Webscript Coursework",
+  "main": "server.js",
+  "dependencies": {
+    "@fullcalendar/core": "^4.0.1",
+    "@fullcalendar/google-calendar": "^4.0.1",
+    "app": "^0.1.0",
+    "body-parser": "^1.16.1",
+    "browserify": "^16.2.3",
+    "dirty": "^1.1.0",
+    "express": "^4.16.4",
+    "googleapis": "^37.2.0",
+    "hammerjs": "^2.0.8",
+    "http": "0.0.0",
+    "interactjs": "^1.4.0-rc.2",
+    "masonry-layout": "^4.2.2",
+    "minigrid": "^3.1.1",
+    "mkdirp": "^0.5.1",
+    "multer": "^1.2.0",
+    "muuri": "^0.7.1",
+    "mysql": "^2.12.0",
+    "newsapi": "^2.4.0",
+    "node-localstorage": "^1.3.1",
+    "node-persist": "^3.0.4",
+    "nodemon": "^1.11.0",
+    "window": "^4.2.6",
+    "write-file-atomic": "^2.4.2",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "nodemon": "nodemon -i API/server",
+    "dashboard": "nodemon -i API/server",
+    "initsql": "mysql -u root -p < API/sql_init.sql"
+  },
+  "author": "UP837518",
+  "license": "ISC"
+}
